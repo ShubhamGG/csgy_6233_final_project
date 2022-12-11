@@ -7,13 +7,9 @@
 #include <unistd.h>
 #include <errno.h>
 #include <malloc.h>
+#include "utils.h"
 
-#define DEBUG 2
-#define INFO if (DEBUG >= 1)
-#define VERBOSE if (DEBUG >= 2)
-
-#define ERR_INV_PARAMS "Invalid Parameters"
-#define ERR_FILE_SZ "File size insufficient"
+#define DEBUG 0
 
 char filename[255];
 size_t blksz, blkcnt;
@@ -73,7 +69,7 @@ void process_args(int argc, char const *argv[])
 
 void op_read()
 {
-    uint res = 0, *p, i;
+    uint i;
     size_t cnt = 0;
     uint *buf = (unsigned int *)malloc(blksz);
     INFO printf("read started.\n");
@@ -84,12 +80,10 @@ void op_read()
             perror(NULL);
             exit(errno);
         }
-        VERBOSE printf("cnt: %lu\r", cnt);
         // xorcalc
         for (i = 0; i < blksz / sizeof(unsigned int); i++)
             fxor ^= buf[i];
     }
-    VERBOSE printf("\n");
     INFO printf("read finished.\n");
     printf("XOR: %u\n", fxor);
     INFO printf("XOR(hex): %x\n", fxor);
@@ -109,7 +103,6 @@ void op_write()
             perror(NULL);
             exit(errno);
         }
-        VERBOSE printf("cnt: %lu\r", cnt);
     }
     INFO printf("write finished.\n");
 }
