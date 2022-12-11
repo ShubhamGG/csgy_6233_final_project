@@ -21,3 +21,6 @@ set -e
 #### Target Programs ####
 
 gcc run.c -o run
+gcc run2.c -o run2
+gcc run3.c -o run3
+gcc run5.c -o run5
