@@ -54,3 +54,9 @@ dkms.conf
 # Custom
 *.iso
 .vscode/*
+du.c
+run
+run_bak.cpp
+run2
+run3
+run5
